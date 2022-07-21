@@ -1,4 +1,4 @@
-# twich_clone
+# twitch_clone
 
 A new Flutter project.
 
