@@ -1,9 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:twich_clone/screens/home_screen.dart';
 import 'package:twich_clone/screens/login_screen.dart';
 import 'package:twich_clone/screens/onboarding_screen.dart';
 import 'package:twich_clone/screens/signup_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -28,8 +32,9 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         OnboardingScreen.routeName: (context) => const OnboardingScreen(),
-        LoginPage.routeName:(context) => const LoginPage(),
-        SignUp.routeName:(context) => const SignUp(),
+        LoginPage.routeName: (context) => const LoginPage(),
+        SignUp.routeName: (context) => const SignUp(),
+        HomeScreen.routeName:(context) => const HomeScreen(),
       },
       home: const OnboardingScreen(),
     );

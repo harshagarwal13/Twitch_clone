@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:twich_clone/Widgets/custom_button.dart';
 import 'package:twich_clone/Widgets/custom_textfield.dart';
+import 'package:twich_clone/resources/auth_methods.dart';
+import 'package:twich_clone/screens/home_screen.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -10,9 +12,23 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  BuildContext context;
   final TextEditingController _emailcontroller = TextEditingController();
   final TextEditingController _passwordcontroller = TextEditingController();
   final TextEditingController _usernamecontroller = TextEditingController();
+  final AuthMethods _authMethods = AuthMethods();
+  void signUpUser() async {
+    bool res = await _authMethods.signUpUsers(
+      context,
+      _emailcontroller.text,
+      _usernamecontroller.text,
+      _passwordcontroller.text,
+    );
+    if(res){
+      Navigator.pushNamed(context, HomeScreen.routeName);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -63,7 +79,7 @@ class _SignUpState extends State<SignUp> {
               SizedBox(
                 height: 20,
               ),
-              CustomButton(text: "Sign Up", onTap: () {}),
+              CustomButton(text: "Sign Up", onTap: signUpUser),
             ],
           ),
         ),
