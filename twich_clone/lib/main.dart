@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:twich_clone/Provider/user_provider.dart';
 import 'package:twich_clone/screens/home_screen.dart';
 import 'package:twich_clone/screens/login_screen.dart';
 import 'package:twich_clone/screens/onboarding_screen.dart';
@@ -8,7 +10,17 @@ import 'package:twich_clone/screens/signup_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          //underscore is passed as it will retuen context and we dont need context so it just says that we dont need it actually
+          create: (_) => UserProvider(),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -34,7 +46,7 @@ class MyApp extends StatelessWidget {
         OnboardingScreen.routeName: (context) => const OnboardingScreen(),
         LoginPage.routeName: (context) => const LoginPage(),
         SignUp.routeName: (context) => const SignUp(),
-        HomeScreen.routeName:(context) => const HomeScreen(),
+        HomeScreen.routeName: (context) => const HomeScreen(),
       },
       home: const OnboardingScreen(),
     );
