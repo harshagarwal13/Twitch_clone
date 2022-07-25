@@ -23,8 +23,8 @@ class _SignUpState extends State<SignUp> {
       _usernamecontroller.text,
       _passwordcontroller.text,
     );
-    if(res){
-      Navigator.pushNamed(context, HomeScreen.routeName);
+    if (res) {
+      Navigator.pushReplacementNamed(context, HomeScreen.routeName);
     }
   }
 
